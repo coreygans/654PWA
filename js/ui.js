@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
       coverTrigger: false,
     },
   });
+
+  //delete menu modal
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
+
 });
