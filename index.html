@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="/css/materialize.min.css" />
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </head>
+
+  <body class="">
+    <!-- Navbar goes here -->
+    <nav>
+        <div class="app-name">
+            <a href="/">Finance Tracker</a>
+        </div>
+      <div class="container">
+        <span class="grey-text text-darken-1 show-on-small hide-on-med-and-up">
+          <i class="material-icons sidenav-trigger" data-target="side-menu"
+            >menu</i
+          >
+        </span>
+       
+      </div>
+    </nav>
+    <!-- Page Layout here -->
+    <div class="row">
+      <div
+        id="side-menu"
+        class="col s3 m4 l3 full-height grey lighten-3 hide-on-small-only">
+        <!-- Note that "m4 l3" was added -->
+        <ul id="" class="">
+          <li><a href="/" class="waves-effect">Home</a></li>
+          <li><a href="/pages/charts.html" class="waves-effect">Charts</a></li>
+          <li>
+            <a href="" class="sidenav-trigger" data-target="side-form">
+              Add Transaction
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- TODO: Add the menu icon only on small screens and have it trigger the slide out menu -->
+
+      <div class="col s9 m8 l9">
+        <div class="col s6 m6 l6">
+          <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+
+          <script>
+            const xValues = [
+              "Restaurant",
+              "Utilities",
+              "Car Payment",
+              "Entertainment",
+              "Misc",
+            ];
+            const yValues = [45.32, 89.22, 300, 12.5, 120.75];
+            const barColors = [
+              "#e53935",
+              "#43a047",
+              "#1e88e5",
+              "#fb8c00",
+              "#8e24aa",
+            ];
+
+            new Chart("myChart", {
+              type: "bar",
+              data: {
+                labels: xValues,
+                datasets: [
+                  {
+                    backgroundColor: barColors,
+                    data: yValues,
+                  },
+                ],
+              },
+              options: {
+                legend: { display: false },
+                title: {
+                  display: true,
+                  text: "Spend by Category",
+                },
+              },
+            });
+          </script>
+        </div>
+        <div class="col s6 m6 l6">
+          <canvas id="myChart2" style="width: 100%; max-width: 600px"></canvas>
+
+          <script>
+            const Labels = ["October", "September"];
+            const amount = [147.04, 420.75];
+            const colors = ["#26a69a", "#2979ff", "orange", "brown"];
+
+            new Chart("myChart2", {
+              type: "doughnut",
+              data: {
+                labels: Labels,
+                datasets: [
+                  {
+                    backgroundColor: colors,
+                    data: amount,
+                  },
+                ],
+              },
+              options: {
+                legend: { display: false },
+                title: {
+                  display: true,
+                  text: "Amount by Month",
+                },
+              },
+            });
+          </script>
+        </div>
+        <div class="col s12 m12 l12 transaction-table">
+          <table class="striped highlight">
+            <tr>
+              <th>Transaction</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr class="transaction row">
+              <td>Kyoto Sushi</td>
+              <td>Restaurant</td>
+              <td>October 2, 2023</td>
+              <td>Dinner at Kyoto</td>
+              <td>$45.32</td>
+              <td>
+                <a href=""><i class="material-icons">edit</i></a>
+              </td>
+              <td>
+                <a class="modal-trigger transaction-delete" href="#modal1">
+                    <i class="material-icons">delete_outline</i>
+                </a>
+              </td>
+            </tr>
+            <tr class="transaction row">
+              <td>Electricity Bill</td>
+              <td>Utilities</td>
+              <td>October 5, 2023</td>
+              <td>Electricity bill for September</td>
+              <td>$89.22</td>
+              <td>
+                <a href=""><i class="material-icons">edit</i></a>
+              </td>
+              <td>
+                <a class="modal-trigger transaction-delete" href="#modal1">
+                    <i class="material-icons">delete_outline</i>
+                </a>
+              </td>            </tr>
+            <tr class="transaction row">
+              <td>Gas Payment</td>
+              <td>Car Payment</td>
+              <td>September 15, 2023</td>
+              <td>Monthly car payment</td>
+              <td>$300.00</td>
+              <td>
+                <a href=""><i class="material-icons">edit</i></a>
+              </td>
+              <td>
+                <a class="modal-trigger transaction-delete" href="#modal1">
+                    <i class="material-icons">delete_outline</i>
+                </a>
+              </td>            </tr>
+            <tr class="transaction row">
+              <td>Movie Night</td>
+              <td>Entertainment</td>
+              <td>October 8, 2023</td>
+              <td>Watched a new movie</td>
+              <td>$12.50</td>
+              <td>
+                <a href=""><i class="material-icons">edit</i></a>
+              </td>
+              <td>
+                <a class="modal-trigger transaction-delete" href="#modal1">
+                    <i class="material-icons">delete_outline</i>
+                </a>
+              </td>            </tr>
+            <tr class="transaction row">
+              <td>Vacation Expenses</td>
+              <td>Misc</td>
+              <td>September 25, 2023</td>
+              <td>Spent on souvenirs during vacation</td>
+              <td>$120.75</td>
+              <td>
+                <a href=""><i class="material-icons">edit</i></a>
+              </td>
+              <td>
+                <a class="modal-trigger transaction-delete" href="#modal1">
+                    <i class="material-icons">delete_outline</i>
+                </a>
+              </td>            </tr>
+          </table>
+        </div>
+
+        <!-- Modal Trigger -->
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Delete Transaction?</h4>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+              >No</a
+            >
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+              >Yes</a
+            >
+          </div>
+        </div>
+
+        <div id="side-form" class="sidenav side-form">
+          <form class="add-transaction container section">
+            <h6>New Transaction</h6>
+            <div class="divider"></div>
+            <div class="input-field">
+              <input
+                placeholder="Enter Transaction title"
+                id="title"
+                class="validate"
+                type="text" />
+              <label for="title">Transaction Title</label>
+            </div>
+            <div class="input-field">
+              <select id="category">
+                <option value="" disabled selected>Choose category</option>
+                <option value="1">Car Payment</option>
+                <option value="2">Entertainment</option>
+                <option value="3">Groceries</option>
+                <option value="4">Misc</option>
+                <option value="5">Rent</option>
+                <option value="6">Restaurant</option>
+                <option value="7">Utilities</option>
+              </select>
+              <label for="category">Select Category</label>
+            </div>
+            <div class="input-field">
+              <input
+                placeholder="Enter date"
+                id="date"
+                class="validate"
+                type="date" />
+              <label for="date">Transaction Date</label>
+            </div>
+            <div class="input-field">
+              <input
+                placeholder="Enter description"
+                id="description"
+                class="validate"
+                type="text" />
+              <label for="description">Transaction Description</label>
+            </div>
+
+            <div class="input-field">
+              <input
+                placeholder="Enter amount"
+                id="amount"
+                class="validate"
+                step="0.01"
+                min="0"
+                type="number" />
+              <label for="amount">Transaction Description</label>
+            </div>
+
+            <div class="input-field center">
+              <button class="btn-small">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/js/ui.js"></script>
+  </body>
+</html>
