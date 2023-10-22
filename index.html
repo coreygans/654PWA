@@ -117,7 +117,7 @@
               <td>Dinner at Kyoto</td>
               <td>$45.32</td>
               <td>
-                <a class="edit-button" data-target="side-form-edit" href="#"
+                <a class="edit-button modal-trigger" href="#modal2"
                   ><i class="material-icons">edit</i></a
                 >
               </td>
@@ -185,9 +185,8 @@
               <td>Spent on souvenirs during vacation</td>
               <td>$120.75</td>
               <td>
-                <a class="edit-button" data-target="side-form-edit" href="#"
-                  ><i class="material-icons">edit</i></a
-                >
+                <a class="edit-button modal-trigger" href="#modal2">
+                    <i class="material-icons">edit</i></a>
               </td>
               <td>
                 <a class="modal-trigger transaction-delete" href="#modal1">
@@ -198,9 +197,7 @@
           </table>
         </div>
 
-        <!-- Modal Trigger -->
-
-        <!-- Modal Structure -->
+        <!-- Delete Modal -->
         <div id="modal1" class="modal">
           <div class="modal-content">
             <h4>Delete Transaction?</h4>
@@ -211,6 +208,75 @@
             >
             <a href="#!" class="modal-close waves-effect waves-green btn-flat"
               >Yes</a
+            >
+          </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="modal2" class="modal">
+          <div class="modal-content">
+            <h4>Edit Transaction</h4>
+            <form class="add-transaction container section">
+              <div class="input-field">
+                <input
+                  placeholder="Enter title"
+                  id="title"
+                  class="validate"
+                  type="text" 
+                  value="Kyoto Sushi" />
+                <label for="title">Transaction Title</label>
+              </div>
+              <div class="input-field">
+                <select id="category">
+                  <option value="" disabled selected>Choose category</option>
+                  <option value="1">Car Payment</option>
+                  <option value="2">Entertainment</option>
+                  <option value="3">Groceries</option>
+                  <option value="4">Misc</option>
+                  <option value="5">Rent</option>
+                  <option selected value="6">Restaurant</option>
+                  <option value="7">Utilities</option>
+                </select>
+                <label for="category">Select Category</label>
+              </div>
+              <div class="input-field">
+                <input
+                  placeholder="Enter date"
+                  id="date"
+                  class="validate"
+                  type="text" 
+                  value="10/02/2023"/>
+                <label for="date">Transaction Date</label>
+              </div>
+              <div class="input-field">
+                <input
+                  placeholder="Enter description"
+                  id="description"
+                  class="validate"
+                  type="text" 
+                  value="Dinner at Kyoto"/>
+                <label for="description">Transaction Description</label>
+              </div>
+
+              <div class="input-field">
+                <input
+                  placeholder="Enter amount"
+                  id="amount"
+                  class="validate"
+                  step="0.01"
+                  min="0"
+                  type="number" 
+                  value="45.32"/>
+                <label for="amount">Transaction Amount</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+              >Save</a
+            >
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+              >Cancel</a
             >
           </div>
         </div>

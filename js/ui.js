@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //Nav Menu
   const menus = document.querySelectorAll(".side-menu");
   M.Sidenav.init(menus, { edge: "left" });
-  // var elems = document.querySelectorAll('.sidenav');
-  // var instances = M.Sidenav.init(elems, { edge: 'left', draggable: false });
 
   // Add Transactions
   const forms = document.querySelectorAll(".side-form");
@@ -17,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  //delete menu modal
+  //modal initialization
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
 
