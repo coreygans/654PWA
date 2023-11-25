@@ -25,6 +25,12 @@ nav .app-name{
   margin-left: 5%;
 }
 
+.auth{
+  margin-right: 15px;
+  margin-top: 10px;
+}
+
+
 .sidenav-fixed{
   background: var(--primary);
   height: 100%;
@@ -113,3 +119,9 @@ form .input-field {
   margin-top:25px;
 }
 
+
+/* Fallback styles */
+
+.message{
+  font-size: x-large;
+}
