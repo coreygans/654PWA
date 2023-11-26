@@ -13,18 +13,37 @@
     <link rel="stylesheet" href="css/app.css" />
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json" />
   </head>
 
   <body class="">
+    <script type="module"></script>
+
     <a
       href=""
       class="sidenav-trigger btn right transaction-add"
       data-target="side-form">
       Add Transaction
     </a>
-    <a href="" class="auth right"> Login</a>
-    <a href="" class="auth right"> Register</a>
+    <a
+      href="#"
+      class="logged-in auth right waves-effect modal-trigger"
+      data-target="modal-account"
+      >Account</a
+    >
+    <a href="#" class="logged-in auth right waves-effect" id="logout">Logout</a>
+    <a
+      href="#"
+      class="logged-out auth right waves-effect modal-trigger"
+      data-target="modal-login"
+      >Login</a
+    >
+    <a
+      href="#"
+      class="logged-out auth right waves-effect modal-trigger"
+      data-target="modal-signup"
+      >Sign up</a
+    >
     <nav>
       <div class="app-name">
         <a href="/">Finance Tracker</a>
@@ -102,103 +121,22 @@
             });
           </script>
         </div>
-        <div class="col s12 m12 l12 transaction-table">
-          <table class="striped highlight">
-            <tr>
-              <th>Transaction</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th></th>
-              <th></th>
-            </tr>
-            <tr class="transaction row">
-              <td>Kyoto Sushi</td>
-              <td>Restaurant</td>
-              <td>October 2, 2023</td>
-              <td>Dinner at Kyoto</td>
-              <td>$45.32</td>
-              <td>
-                <a class="edit-button modal-trigger" href="#modal2"
-                  ><i class="material-icons">edit</i></a
-                >
-              </td>
-              <td>
-                <a class="modal-trigger transaction-delete" href="#modal1">
-                  <i class="material-icons">delete_outline</i>
-                </a>
-              </td>
-            </tr>
-            <tr class="transaction row">
-              <td>Electricity Bill</td>
-              <td>Utilities</td>
-              <td>October 5, 2023</td>
-              <td>Electricity bill for September</td>
-              <td>$89.22</td>
-              <td>
-                <a class="edit-button" data-target="side-form-edit" href="#"
-                  ><i class="material-icons">edit</i></a
-                >
-              </td>
-              <td>
-                <a class="modal-trigger transaction-delete" href="#modal1">
-                  <i class="material-icons">delete_outline</i>
-                </a>
-              </td>
-            </tr>
-            <tr class="transaction row">
-              <td>Gas Payment</td>
-              <td>Car Payment</td>
-              <td>September 15, 2023</td>
-              <td>Monthly car payment</td>
-              <td>$300.00</td>
-              <td>
-                <a class="edit-button" data-target="side-form-edit" href="#"
-                  ><i class="material-icons">edit</i></a
-                >
-              </td>
-              <td>
-                <a class="modal-trigger transaction-delete" href="#modal1">
-                  <i class="material-icons">delete_outline</i>
-                </a>
-              </td>
-            </tr>
-            <tr class="transaction row">
-              <td>Movie Night</td>
-              <td>Entertainment</td>
-              <td>October 8, 2023</td>
-              <td>Watched a new movie</td>
-              <td>$12.50</td>
-              <td>
-                <a class="edit-button" data-target="side-form-edit" href="#"
-                  ><i class="material-icons">edit</i></a
-                >
-              </td>
-              <td>
-                <a class="modal-trigger transaction-delete" href="#modal1">
-                  <i class="material-icons">delete_outline</i>
-                </a>
-              </td>
-            </tr>
-            <tr class="transaction row">
-              <td>Vacation Expenses</td>
-              <td>Misc</td>
-              <td>September 25, 2023</td>
-              <td>Spent on souvenirs during vacation</td>
-              <td>$120.75</td>
-              <td>
-                <a class="edit-button modal-trigger" href="#modal2">
-                    <i class="material-icons">edit</i></a>
-              </td>
-              <td>
-                <a class="modal-trigger transaction-delete" href="#modal1">
-                  <i class="material-icons">delete_outline</i>
-                </a>
-              </td>
-            </tr>
-          </table>
+
+        <div class="tasks container grey-text text-darken-1">
+
         </div>
+
+        <table class="striped highlight" id="transactions-table">
+          <tr>
+            <th>Transaction</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
 
         <!-- Delete Modal -->
         <div id="modal1" class="modal">
@@ -216,18 +154,18 @@
         </div>
 
         <!-- Edit Modal -->
-        <div id="modal2" class="modal">
+        <div id="edit-modal" class="modal">
           <div class="modal-content">
             <h4>Edit Transaction</h4>
             <form class="add-transaction container section">
               <div class="input-field">
                 <input
-                  placeholder="Enter title"
-                  id="title"
+                  placeholder="Enter name"
+                  id="name"
                   class="validate"
-                  type="text" 
+                  type="text"
                   value="Kyoto Sushi" />
-                <label for="title">Transaction Title</label>
+                <label for="name">Transaction Name</label>
               </div>
               <div class="input-field">
                 <select id="category">
@@ -247,8 +185,8 @@
                   placeholder="Enter date"
                   id="date"
                   class="validate"
-                  type="text" 
-                  value="10/02/2023"/>
+                  type="text"
+                  value="10/02/2023" />
                 <label for="date">Transaction Date</label>
               </div>
               <div class="input-field">
@@ -256,8 +194,8 @@
                   placeholder="Enter description"
                   id="description"
                   class="validate"
-                  type="text" 
-                  value="Dinner at Kyoto"/>
+                  type="text"
+                  value="Dinner at Kyoto" />
                 <label for="description">Transaction Description</label>
               </div>
 
@@ -268,8 +206,8 @@
                   class="validate"
                   step="0.01"
                   min="0"
-                  type="number" 
-                  value="45.32"/>
+                  type="number"
+                  value="45.32" />
                 <label for="amount">Transaction Amount</label>
               </div>
             </form>
@@ -285,33 +223,35 @@
         </div>
 
         <div id="side-form" class="sidenav side-form">
-          <form class="add-transaction container section">
+          <form id="addTransaction" class="add-transaction container section">
             <h6>New Transaction</h6>
             <div class="divider"></div>
             <div class="input-field">
               <input
-                placeholder="Enter title"
-                id="title"
+                placeholder="Enter name"
+                id="name"
+                name="name"
                 class="validate"
                 type="text" />
-              <label for="title">Transaction Title</label>
+              <label for="title">Transaction Name</label>
             </div>
             <div class="input-field">
-              <select id="category">
+              <select id="category" name="category">
                 <option value="" disabled selected>Choose category</option>
-                <option value="1">Car Payment</option>
-                <option value="2">Entertainment</option>
-                <option value="3">Groceries</option>
-                <option value="4">Misc</option>
-                <option value="5">Rent</option>
-                <option value="6">Restaurant</option>
-                <option value="7">Utilities</option>
+                <option value="Car Payment">Car Payment</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Rent">Rent</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Misc">Misc</option>
               </select>
               <label for="category">Select Category</label>
             </div>
             <div class="input-field">
               <input
                 placeholder="Enter date"
+                name="date"
                 id="date"
                 class="validate"
                 type="date" />
@@ -321,6 +261,7 @@
               <input
                 placeholder="Enter description"
                 id="description"
+                name="description"
                 class="validate"
                 type="text" />
               <label for="description">Transaction Description</label>
@@ -330,6 +271,7 @@
               <input
                 placeholder="Enter amount"
                 id="amount"
+                name="amount"
                 class="validate"
                 step="0.01"
                 min="0"
@@ -338,12 +280,61 @@
             </div>
 
             <div class="input-field center">
-              <button class="btn-small">Add</button>
+              <button class="btn-small" type="submit" name="action">Add</button>
             </div>
           </form>
         </div>
       </div>
+
+      <!-- SIGN UP MODAL -->
+      <div id="modal-signup" class="modal">
+        <div class="modal-content">
+          <h4>Sign up</h4>
+          <br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+              <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+            </div>
+            <button class="btn darken-2 z-depth-0">Sign up</button>
+          </form>
+        </div>
+      </div>
+      <!-- LOGIN MODAL -->
+      <div id="modal-login" class="modal">
+        <div class="modal-content">
+          <h4>Login</h4>
+          <br />
+          <form id="login-form">
+            <div class="input-field">
+              <input type="email" id="login-email" required />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Your password</label>
+            </div>
+            <button class="btn darken-2 z-depth-0">Login</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- ACCOUNT MODAL -->
+      <div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+          <h4>Account details</h4>
+          <br />
+          <div class="account-details"></div>
+        </div>
+      </div>
     </div>
-    <script src="js/ui.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+    <script type="module" src="./js/db.js"></script>
+    <script type="module" src="./js/auth.js"></script>
   </body>
 </html>

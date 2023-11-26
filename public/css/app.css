@@ -70,8 +70,9 @@ margin-right: 10px;
   bottom: 0px;
   right: 20px;
 }
-a.transaction-delete {
+.transaction-delete {
   color: #f44336;
+  cursor: pointer;
 }
 
 .transaction-title {

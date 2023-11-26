@@ -1,5 +1,5 @@
-const staticCache = "Static-cache-v7";
-const dynamicCache = "Dynamic-cache-v5";
+const staticCache = "Static-cache-v3";
+const dynamicCache = "Dynamic-cache-v3";
 
 const assets = [
   "/",
@@ -68,7 +68,7 @@ self.addEventListener("fetch", function (event) {
           fetch(event.request).then((fetchRes) => {
             return caches.open(dynamicCache).then((cache) => {
               cache.put(event.request.url, fetchRes.clone());
-              limitCacheSize(dynamicCache, 3);
+              limitCacheSize(dynamicCache, 15);
               return fetchRes;
             });
           })
