@@ -17,7 +17,6 @@ const firebaseConfig = {
   appId: "1:717459811296:web:b405fe2e9d4f030fd05985",
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -35,16 +34,18 @@ const setupUI = (user) => {
   }
 };
 
-
 //listen for auth status changes
 onAuthStateChanged(auth, (user) => {
   // Check for user status
   // console.log(user);
   if (user) {
     console.log("User log in: ", user.email);
-    getTransactions(db).then((snapshot) => {
-      renderTransactions(snapshot);
-    });
+    // getTransactions(db).then((snapshot) => {
+    //   renderTransactions(snapshot);
+    // });
+    const accountDetails = document.querySelector(".account-details");  
+    accountDetails.innerHTML = '<b>user:</b>' + user.email;
+  
     setupUI(user);
     const form = document.querySelector("form");
     form.addEventListener("submit", (event) => {
@@ -60,7 +61,7 @@ onAuthStateChanged(auth, (user) => {
   } else {
     // console.log("User Logged out");
     setupUI();
-    renderTransactions([]);
+    // renderTransactions([]);
   }
 });
 
@@ -95,10 +96,11 @@ logout.addEventListener("click", (e) => {
   e.preventDefault();
   signOut(auth)
     .then(() => {
-      // console.log("user has signed out");
+      setupUI();
     })
     .catch((error) => {
-      // An error happened.
+      const errorCode = error.code;
+      const errorMessage = error.message;
     });
 });
 
@@ -117,7 +119,6 @@ loginForm.addEventListener("submit", (e) => {
       const modal = document.querySelector("#modal-login");
       M.Modal.getInstance(modal).close();
       loginForm.reset();
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
