@@ -29,14 +29,15 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
+
   //modal initialization
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
-});
 
-//remove transaction from DOM
-const removeTransaction = (id) => {
-  const transaction = document.querySelector(`tr[data-id =${id}]`);
-  // console.log(task);
-  transaction.remove();
-};
+  //remove transaction from DOM
+  const removeTransaction = (id) => {
+    const transaction = document.querySelector(`tr[data-id =${id}]`);
+    // console.log(task);
+    transaction.remove();
+  };
+});

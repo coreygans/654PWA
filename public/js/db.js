@@ -55,7 +55,7 @@ function renderTransactions(dc) {
   description.textContent = dc.data().description;
   amount.textContent = "$" + dc.data().amount;
   edit.innerHTML =
-    '<a class="edit-button modal-trigger" data-target="edit-modal" href="#"><i class="material-icons">edit</i></a>';
+    '<i class="material-icons edit-transaction modal-trigger" data-target="edit-modal">edit</i>';
   del.innerHTML =
     '<i class="material-icons transaction-delete">delete_outline</i>';
 

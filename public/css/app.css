@@ -74,6 +74,10 @@ margin-right: 10px;
   color: #f44336;
   cursor: pointer;
 }
+.edit-transaction {
+  color: #1e88e5;
+  cursor: pointer;
+}
 
 .transaction-title {
   font-weight: bold;

@@ -122,10 +122,6 @@
           </script>
         </div>
 
-        <div class="transactions container grey-text text-darken-1">
-
-        </div>
-
         <table class="striped highlight" id="transactions-table">
           <tr>
             <th>Transaction</th>
@@ -138,64 +134,28 @@
           </tr>
         </table>
 
-        <!-- Delete Modal -->
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h4>Delete Transaction?</h4>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
-              >No</a
-            >
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
-              >Yes</a
-            >
-          </div>
-        </div>
 
         <!-- Edit Modal -->
         <div id="edit-modal" class="modal">
           <div class="modal-content">
             <h4>Edit Transaction</h4>
-            <form class="add-transaction container section">
+            <form class="edit-transaction container section">
               <div class="input-field">
                 <input
                   placeholder="Enter name"
                   id="name"
                   class="validate"
-                  type="text"
-                  value="Kyoto Sushi" />
+                  type="text"/>
                 <label for="name">Transaction Name</label>
               </div>
-              <div class="input-field">
-                <select id="category">
-                  <option value="" disabled selected>Choose category</option>
-                  <option value="1">Car Payment</option>
-                  <option value="2">Entertainment</option>
-                  <option value="3">Groceries</option>
-                  <option value="4">Misc</option>
-                  <option value="5">Rent</option>
-                  <option selected value="6">Restaurant</option>
-                  <option value="7">Utilities</option>
-                </select>
-                <label for="category">Select Category</label>
-              </div>
-              <div class="input-field">
-                <input
-                  placeholder="Enter date"
-                  id="date"
-                  class="validate"
-                  type="text"
-                  value="10/02/2023" />
-                <label for="date">Transaction Date</label>
-              </div>
+
               <div class="input-field">
                 <input
                   placeholder="Enter description"
                   id="description"
                   class="validate"
                   type="text"
-                  value="Dinner at Kyoto" />
+                  />
                 <label for="description">Transaction Description</label>
               </div>
 
@@ -207,7 +167,7 @@
                   step="0.01"
                   min="0"
                   type="number"
-                  value="45.32" />
+                  />
                 <label for="amount">Transaction Amount</label>
               </div>
             </form>
@@ -250,12 +210,12 @@
             </div>
             <div class="input-field">
               <input
-                placeholder="Enter date"
+                placeholder="Enter date (yyyy-mm-dd)"
                 name="date"
                 id="date"
                 class="validate"
-                type="date" />
-              <label for="date">Transaction Date</label>
+                type="text" />
+              <label for="date">Transaction Date </label>
             </div>
             <div class="input-field">
               <input
