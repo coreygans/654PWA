@@ -28,13 +28,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-async function getTransactions(db) {
-  const transactionsCol = collection(db, "transactions");
-  const transactionsSnapshot = await getDocs(transactionsCol);
-  console.log(transactionsSnapshot);
-  const transactionsList = transactionsSnapshot.docs.map((doc) => doc.data());
-  return transactionsList;
-}
+// async function getTransactions(db) {
+//   const transactionsCol = collection(db, "transactions");
+//   const transactionsSnapshot = await getDocs(transactionsCol);
+//   console.log(transactionsSnapshot);
+//   const transactionsList = transactionsSnapshot.docs.map((doc) => doc.data());
+//   return transactionsList;
+// }
+
+
 
 const transactionsList = document.querySelector("#transactions-table");
 
@@ -115,9 +117,9 @@ const unsub = onSnapshot(collection(db, "transactions"), (doc) => {
       //Call render function in UI
       renderTransactions(change.doc.data(), change.doc.id);
     }
-    if (change.type === "removed") {
-      //do something
-      removeTransaction(change.doc.id);
-    }
+    // if (change.type === "removed") {
+    //   //do something
+    //   removeTransaction(change.doc.id);
+    // }
   });
 });
