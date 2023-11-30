@@ -57,7 +57,7 @@ function renderTransactions(dc) {
   description.textContent = dc.data().description;
   amount.textContent = "$" + dc.data().amount;
   edit.innerHTML =
-    '<i class="material-icons edit-transaction modal-trigger" data-target="edit-modal">edit</i>';
+    `<i data-id="${dc.id}" class="material-icons edit-transaction modal-trigger" data-target="edit-modal">edit</i>`;
   del.innerHTML =
     '<i class="material-icons transaction-delete">delete_outline</i>';
 
@@ -72,12 +72,15 @@ function renderTransactions(dc) {
 
   transactionsList.appendChild(tr);
 
+ 
   del.addEventListener("click", (e) => {
     e.stopPropagation();
     let id = e.target.parentElement.parentElement.getAttribute("data-id");
     deleteDoc(doc(db, "transactions", id));
   });
 }
+
+
 const transactions = getDocs(collection(db, "transactions")).then(
   (snapshot) => {
     snapshot.forEach((dc) => {
@@ -86,6 +89,7 @@ const transactions = getDocs(collection(db, "transactions")).then(
   }
 );
 const addTransaction = document.querySelector("#addTransaction");
+
 
 addTransaction.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -99,6 +103,10 @@ addTransaction.addEventListener("submit", async (e) => {
     });
     addTransaction.reset();
 });
+
+
+//Edit Transaction - query the document id and with the data that is returned, pass it into the form
+// Then when the form is updated it will call the updateTransaction 
 
 //This worked to update, but I need to tie it into a form
 

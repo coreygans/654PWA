@@ -20,19 +20,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add Transactions
   const forms = document.querySelectorAll(".side-form");
   M.Sidenav.init(forms, { edge: "right" });
-  //Select menu
-  var elems = document.querySelectorAll("select");
-  var instances = M.FormSelect.init(elems, {
-    dropdownOptions: {
-      alignment: "left",
-      coverTrigger: false,
-    },
-  });
+  // //Select menu
+  // var elems = document.querySelectorAll("select");
+  // var instances = M.FormSelect.init(elems, {
+  //   dropdownOptions: {
+  //     alignment: "left",
+  //     coverTrigger: false,
+  //   },
+  // });
 
 
   //modal initialization
   var elems = document.querySelectorAll(".modal");
+  // const editMod = document.querySelector(".edit-modal");
   var instances = M.Modal.init(elems);
+//   const instance = M.Modal.init(editMod, {onOpenStart:function(){
+//     console.log('modal callback');
+// }}
+// );
 
   //remove transaction from DOM
   const removeTransaction = (id) => {
