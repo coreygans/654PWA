@@ -13,4 +13,4 @@ The Finance Tracker allows you to add financial transactions and see charts that
 
 ### Accessing Finance Tracker
 
-Go to https://coreygans.github.io/654PWA/ and you'll be able to see the Finance Tracker which is linked to this repo and automatically updated as changes are made to the main branch.
+Go to https://coreygans.github.io/654PWA/public and you'll be able to see the Finance Tracker which is linked to this repo and automatically updated as changes are made to the main branch.
