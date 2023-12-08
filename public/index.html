@@ -21,7 +21,7 @@
 
     <a
       href=""
-      class="sidenav-trigger btn right transaction-add"
+      class="sidenav-trigger btn right transaction-add logged-in"
       data-target="side-form">
       Add Transaction
     </a>
@@ -156,7 +156,7 @@
               <div class="input-field">
                 <input
                   placeholder="Enter name"
-                  id="name"
+                  id="editName"
                   class="validate"
                   type="text"/>
                 <label for="name">Transaction Name</label>
@@ -165,7 +165,7 @@
               <div class="input-field">
                 <input
                   placeholder="Enter description"
-                  id="description"
+                  id="editDescription"
                   class="validate"
                   type="text"
                   />
@@ -175,7 +175,7 @@
               <div class="input-field">
                 <input
                   placeholder="Enter amount"
-                  id="amount"
+                  id="editAmount"
                   class="validate"
                   step="0.01"
                   min="0"
@@ -186,7 +186,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+            <a href="#" class="editSubmit waves-effect waves-green btn-flat"
               >Save</a
             >
             <a href="#!" class="modal-close waves-effect waves-green btn-flat"
@@ -194,7 +194,7 @@
             >
           </div>
         </div>
-
+<!-- Add Transaction form -->
         <div id="side-form" class="sidenav side-form">
           <form id="addTransaction" class="add-transaction container section">
             <h6>New Transaction</h6>

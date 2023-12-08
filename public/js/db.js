@@ -4,6 +4,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
   addDoc,
   doc,
   deleteDoc,
@@ -36,8 +37,6 @@ const db = getFirestore(app);
 //   return transactionsList;
 // }
 
-
-
 const transactionsList = document.querySelector("#transactions-table");
 
 function renderTransactions(dc) {
@@ -56,8 +55,7 @@ function renderTransactions(dc) {
   date.textContent = dc.data().date;
   description.textContent = dc.data().description;
   amount.textContent = "$" + dc.data().amount;
-  edit.innerHTML =
-    `<i data-id="${dc.id}" class="material-icons edit-transaction modal-trigger" data-target="edit-modal">edit</i>`;
+  edit.innerHTML = `<i data-id="${dc.id}" class="material-icons edit-transaction modal-trigger" data-target="edit-modal">edit</i>`;
   del.innerHTML =
     '<i class="material-icons transaction-delete">delete_outline</i>';
 
@@ -72,14 +70,48 @@ function renderTransactions(dc) {
 
   transactionsList.appendChild(tr);
 
- 
+  edit.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const editId = e.target.parentElement.parentElement.getAttribute("data-id");
+    const transactionRef = doc(db, "transactions", editId);
+    const docSnap = await getDoc(transactionRef);
+    const editTransactionForm = document.querySelector(".edit-transaction");
+    // docSnap.then((doc) => {
+    if (docSnap.exists()) {
+      // Populate the form fields
+      document.querySelector("#editName").value = docSnap.data().name;
+      document.querySelector("#editDescription").value =
+        docSnap.data().description;
+      document.querySelector("#editAmount").value = docSnap.data().amount;
+
+      //open modal
+      const editModal = document.getElementById("edit-modal");
+      const instance = M.Modal.init(editModal, { dismissible: true });
+      instance.open();
+
+      const editSubmit = document.querySelector(".editSubmit");
+
+      editSubmit.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        const updateTransaction = doc(db, "transactions", editId);
+        await updateDoc(updateTransaction, {
+          name: document.querySelector("#editName").value,
+          description: document.querySelector("#editDescription").value,
+          amount: document.querySelector("#editAmount").value,
+        });
+        instance.close();
+      });
+
+    }
+    //});
+  });
+
   del.addEventListener("click", (e) => {
     e.stopPropagation();
     let id = e.target.parentElement.parentElement.getAttribute("data-id");
     deleteDoc(doc(db, "transactions", id));
   });
 }
-
 
 const transactions = getDocs(collection(db, "transactions")).then(
   (snapshot) => {
@@ -90,33 +122,24 @@ const transactions = getDocs(collection(db, "transactions")).then(
 );
 const addTransaction = document.querySelector("#addTransaction");
 
-
 addTransaction.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-    const docRef = addDoc(collection(db, "transactions"), {
-      name: addTransaction.name.value,
-      category: addTransaction.category.value,
-      date: addTransaction.date.value,
-      description: addTransaction.description.value,
-      amount: addTransaction.amount.value,
-    });
-    addTransaction.reset();
+  const docRef = addDoc(collection(db, "transactions"), {
+    name: addTransaction.name.value,
+    category: addTransaction.category.value,
+    date: addTransaction.date.value,
+    description: addTransaction.description.value,
+    amount: addTransaction.amount.value,
+  });
+  addTransaction.reset();
 });
-
-
-//Edit Transaction - query the document id and with the data that is returned, pass it into the form
-// Then when the form is updated it will call the updateTransaction 
-
-//This worked to update, but I need to tie it into a form
 
 // const updateTransaction = doc(db, "transactions", "qaAfOHk1moIbtY8DIYnd");
 // updateDoc(updateTransaction, {
 //   name: "DeLorean payment"
 // })
 
-
-// This is needed to refresh after creating, but it isn't working
 const unsub = onSnapshot(collection(db, "transactions"), (doc) => {
   //   console.log(doc.docChanges());
   doc.docChanges().forEach((change) => {
