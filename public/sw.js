@@ -1,5 +1,5 @@
-const staticCache = "Static-cache-v3";
-const dynamicCache = "Dynamic-cache-v3";
+const staticCache = "Static-cache-v8";
+const dynamicCache = "Dynamic-cache-v8";
 
 const assets = [
   "/",
@@ -54,11 +54,12 @@ self.addEventListener("activate", function (event) {
     })
   );
 });
-//comment
+
 self.addEventListener("fetch", function (event) {
   //fires whenever the app requests a resource (file or data)
   // console.log(`SW: Fetching ${event.request.url}`);
   //next, go get the requested resource from the network
+  if(event.request.url.indexOf("firestore.googleapis.com") === -1) {
   event.respondWith(
     caches
       .match(event.request)
@@ -76,4 +77,5 @@ self.addEventListener("fetch", function (event) {
       })
       .catch(() => caches.match("/pages/fallback.html"))
   );
+    };
 });
